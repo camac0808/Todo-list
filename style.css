@@ -1,0 +1,166 @@
+body {
+  margin: 0;
+  background-image: url("backgroundimage.jfif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Rajdhani", sans-serif;
+}
+
+.container {
+  background-color: aliceblue;
+  min-height: 100vh;
+  height: 100%;
+  max-width: 800px;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.input-area {
+  position: relative;
+}
+
+.task-area {
+  border: 1px solid lightgray;
+}
+
+.task-tabs {
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid lightgray;
+}
+
+.task-tabs div {
+  padding: 1em;
+}
+
+#under-line {
+  height: 4px;
+  background-color: pink;
+  position: absolute;
+  width: 65px;
+  left: 65px;
+  top: 52px;
+  padding: 0px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  align-items: center;
+}
+
+.task-line {
+  text-decoration: line-through;
+  transition: 0.5s;
+}
+
+.button-box {
+  display: flex;
+  margin: 10px;
+}
+
+/* 버튼 css */
+button.first-demo-btn {
+  background-color: antiquewhite;
+  border-radius: 50%;
+  border-width: 0;
+  box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+  color: #111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 1.5em;
+  height: 50px;
+  padding: 0 20px;
+  text-align: center;
+  transition: all 200ms;
+}
+
+button.first-demo-btn:hover {
+  background-color: wheat;
+  transform: scale(1.05);
+}
+
+button.btn.demo-btn.first-demo-btn svg.svg-inline--fa.fa-eye.fa-w-18 path {
+  color: green;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* CSS */
+.button-85 {
+  padding: 0.6em 2em;
+  margin-right: 0.3em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:hover {
+  transform: scale(1.05);
+  transition: 0.8s;
+}
+.button-85:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85::after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
