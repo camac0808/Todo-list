@@ -1,16 +1,10 @@
-// 유저가 input에 값을 입력
-// + 버튼 누르면 할일 추가된다
-// delete 버튼 누르면 삭제된다
-// check 버튼 누르면 할일 밑줄 그인다
-// 진행중 끝남 탭을 누르면 언더바 이동
-// 끝남탭은 끝난 아이템만
-// 진행중은 진행중 아이템만 출력
-// 전체누르면 전체로 돌아옴
-
 const taskInput = document.getElementById("task-input");
 const addButton = document.getElementById("add-button");
-const tabsButton = document.getElementsByClassName("tabs-btn");
+const tabs = document.querySelectorAll(".task-tabs div");
+
+let mode = "all";
 let taskList = [];
+let filterList = [];
 
 // 추가 버튼 누를때
 function addTask() {
@@ -70,30 +64,37 @@ function deleteTask(id) {
 // 실행 (그리기) 함수
 function render() {
   let resultHTML = "";
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].taskComplete == true) {
+  let list = [];
+  if (mode === "all") {
+    list = taskList;
+  } else if (mode === "ongoing" || mode === "done") {
+    list = filterList;
+  }
+
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].taskComplete == true) {
       resultHTML += `
       <div class="task" style="background-color: lightgray">
-        <div class="task-line">${taskList[i].taskValue}</div>
+        <div class="task-line">${list[i].taskValue}</div>
         <div class="button-box">
-          <button onClick="toggleComplete('${taskList[i].id}')" class="button-85">➖</button>
-          <button onClick="deleteTask('${taskList[i].id}')" class="button-85">❌</button>
+          <button onClick="toggleComplete('${list[i].id}')" class="button-85">➖</button>
+          <button onClick="deleteTask('${list[i].id}')" class="button-85">❌</button>
         </div>
       </div>`;
-    } else if (taskList[i].taskDelete == true) {
+    } else if (list[i].taskDelete == true) {
       resultHTML += `<div class="task" id="delete">
-      <div class="task-line">${taskList[i].taskValue}</div>
+      <div>${list[i].taskValue}</div>
       <div class="button-box">
-        <button onClick="toggleComplete('${taskList[i].id}')" class="button-85">✔️</button>
-        <button onClick="deleteTask('${taskList[i].id}')" class="button-85">❌</button>
+        <button onClick="toggleComplete('${list[i].id}')" class="button-85">✔️</button>
+        <button onClick="deleteTask('${list[i].id}')" class="button-85">❌</button>
       </div>
     </div>`;
     } else {
       resultHTML += `<div class="task">
-    <div>${taskList[i].taskValue}</div>
+    <div>${list[i].taskValue}</div>
     <div class="button-box">
-      <button onClick="toggleComplete('${taskList[i].id}')" class="button-85">✔️</button>
-      <button onClick="deleteTask('${taskList[i].id}')" class="button-85">❌</button>
+      <button onClick="toggleComplete('${list[i].id}')" class="button-85">✔️</button>
+      <button onClick="deleteTask('${list[i].id}')" class="button-85">❌</button>
     </div>
   </div>`;
     }
@@ -101,10 +102,39 @@ function render() {
   document.getElementById("task-board").innerHTML = resultHTML;
 }
 
-function filterTabs() {
-  tabsArr = []
+// tab 선택할때 (모두, 진행중, 완료 탭)
+for (let i = 1; i < tabs.length; i++) {
+  tabs[i].addEventListener("click", (event) => {
+    mode = event.target.id; // "all" "ongoing" "done"
+    //모두탭
+    if (mode == "all") {
+      render();
+    }
+    //진행중탭
+    else if (mode == "ongoing") {
+      filterList = taskList.filter((todo) => todo.taskComplete === false);
+      render();
+    }
+    //완료탭
+    else if (mode == "done") {
+      filterList = taskList.filter((todo) => todo.taskComplete === true);
+      render();
+    }
+  });
 }
 
 taskInput.addEventListener("keydown", enterTask);
 addButton.addEventListener("click", addTask);
-tabsButton.addEventListener("click", filterTabs)
+
+// pink underline 만들기
+const line = document.getElementById("under-line");
+
+tabs.forEach((menu) => {
+  menu.addEventListener("click", underLine);
+});
+
+function underLine(e) {
+  line.style.top = e.target.offsetTop + e.target.offsetHeight + "px";
+  line.style.left = e.target.offsetLeft + "px";
+  line.style.width = e.target.offsetWidth + "px";
+}
