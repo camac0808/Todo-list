@@ -47,6 +47,7 @@ body {
   top: 0px;
   padding: 0px;
   transition: 0.8s;
+  z-index: 1;
 }
 
 .task {
