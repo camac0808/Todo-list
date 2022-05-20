@@ -1,10 +1,21 @@
 const taskInput = document.getElementById("task-input");
 const addButton = document.getElementById("add-button");
 const tabs = document.querySelectorAll(".task-tabs div");
+const h1 = document.querySelector("h1");
+const h2 = document.querySelector("h2");
+const h3 = document.querySelector("h3");
 
 let mode = "all";
 let taskList = [];
 let filterList = [];
+
+// 날짜 표시 h1
+const date = new Date();
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",];
+const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
+h1.innerHTML = `${weekday[date.getDay()]}, `;
+h2.innerHTML = `${date.getUTCDate()}th`;
+h3.innerHTML = `${month[date.getMonth()]}`;
 
 // 추가 버튼 누를때
 function addTask() {
@@ -75,7 +86,9 @@ function render() {
     if (list[i].taskComplete == true) {
       resultHTML += `
       <div class="task" style="background-color: lightgray">
-        <div class="task-line">${list[i].taskValue}</div>
+        <div class="task-line">
+          <input type="checkbox" id="task-checkbox" checked disabled/>${list[i].taskValue}
+        </div>
         <div class="button-box">
           <button onClick="toggleComplete('${list[i].id}')" class="button-85">➖</button>
           <button onClick="deleteTask('${list[i].id}')" class="button-85">❌</button>
@@ -91,7 +104,7 @@ function render() {
     </div>`;
     } else {
       resultHTML += `<div class="task">
-    <div>${list[i].taskValue}</div>
+    <div><input type="checkbox" id="task-checkbox" disabled/>${list[i].taskValue}</div>
     <div class="button-box">
       <button onClick="toggleComplete('${list[i].id}')" class="button-85">✔️</button>
       <button onClick="deleteTask('${list[i].id}')" class="button-85">❌</button>

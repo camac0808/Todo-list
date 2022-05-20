@@ -1,23 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 body {
   margin: 0;
   background-image: url("backgroundimage.jfif");
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: "Rajdhani", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .container {
   background-color: aliceblue;
+  margin-top: 50px;
   min-height: 100vh;
   height: 100%;
+  padding: 20px;
   max-width: 800px;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+h1 {
+  color: rgb(75, 107, 202);
+  display: inline;
+  font-size: 40px
+}
+
+h2 {
+  color: rgb(75, 107, 202);
+  display: inline;
+  font-size: 30px;
+}
+
+h3 {
+  color: rgb(150, 150, 150);
+  font-size: 25px;
+  margin-left: 3px;
+  margin-top: 5px;
+}
+
 .input-area {
   position: relative;
+}
+
+#task-input {
+  border-radius: 5px;
+  border: 1px solid rgb(75, 107, 202);
+  text-align: center;
 }
 
 .task-area {
@@ -31,12 +61,10 @@ body {
 
 .task-tabs div {
   padding: 1em;
-
   width: 100px;
   text-align: center;
   cursor: pointer;
 }
-
 
 #under-line {
   height: 4px;
@@ -70,17 +98,21 @@ body {
   margin: 10px;
 }
 
+#task-checkbox {
+  margin-right: 20px;
+}
+
 /* 버튼 css */
 button.first-demo-btn {
-  background-color: antiquewhite;
+  background-color: rgb(75, 107, 202);
   border-radius: 50%;
   border-width: 0;
   box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
-  color: #111;
+  color: aliceblue;
   cursor: pointer;
   display: inline-block;
   font-family: Arial, sans-serif;
-  font-size: 1.5em;
+  font-size: 1.4em;
   height: 50px;
   padding: 0 20px;
   text-align: center;
