@@ -33,7 +33,7 @@ function addTask() {
 
 // 엔터 쳐서 추가할때
 function enterTask(event) {
-  if (taskInput.value !== "" && event.keyCode === 13) {
+  if (taskInput.value !== "" && event.key === "Enter") {
     let task = {
       id: randomIDGenerate(),
       taskValue: taskInput.value,
@@ -71,6 +71,28 @@ function deleteTask(id) {
   }
   render();
 }
+
+// tab 선택할때 (모두, 진행중, 완료 탭)
+for (let i = 1; i < tabs.length; i++) {
+  tabs[i].addEventListener("click", (event) => {
+    mode = event.target.id; // "all" "ongoing" "done"
+    //모두탭
+    if (mode == "all") {
+      render();
+    }
+    //진행중탭
+    else if (mode == "ongoing") {
+      filterList = taskList.filter((todo) => todo.taskComplete === false);
+      render();
+    }
+    //완료탭
+    else if (mode == "done") {
+      filterList = taskList.filter((todo) => todo.taskComplete === true);
+      render();
+    }
+  });
+}
+
 
 // 실행 (그리기) 함수
 function render() {
@@ -113,27 +135,6 @@ function render() {
     }
   }
   document.getElementById("task-board").innerHTML = resultHTML;
-}
-
-// tab 선택할때 (모두, 진행중, 완료 탭)
-for (let i = 1; i < tabs.length; i++) {
-  tabs[i].addEventListener("click", (event) => {
-    mode = event.target.id; // "all" "ongoing" "done"
-    //모두탭
-    if (mode == "all") {
-      render();
-    }
-    //진행중탭
-    else if (mode == "ongoing") {
-      filterList = taskList.filter((todo) => todo.taskComplete === false);
-      render();
-    }
-    //완료탭
-    else if (mode == "done") {
-      filterList = taskList.filter((todo) => todo.taskComplete === true);
-      render();
-    }
-  });
 }
 
 taskInput.addEventListener("keydown", enterTask);
